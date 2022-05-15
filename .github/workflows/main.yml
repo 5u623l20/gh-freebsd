@@ -24,7 +24,7 @@ jobs:
       - name: Set ENV
         run: |
           echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
-          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-$TARGET_ARCH-run.sh
+          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-$TARGET_ARCH-run.sh' >> $GITHUB_ENV
           echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
           curl https://example.lab >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
@@ -33,13 +33,13 @@ jobs:
           #QEMU_MACHINE: virt
           #QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57
           #USE_QEMU: 1
-          #echo 'USE_TEST_SUBR<<EOF' >> $GITHUB_ENV
-          #disable-disks-tests.sh >> $GITHUB_ENV
-          #disable-dtrace-tests.sh >> $GITHUB_ENV
-          #disable-zfs-tests.sh >> $GITHUB_ENV
-          #disable-notyet-tests.sh >> $GITHUB_ENV
-          #run-kyua.sh >> $GITHUB_ENV
-          #echo 'EOF' >> $GITHUB_ENV
+          echo 'USE_TEST_SUBR<<EOF' >> $GITHUB_ENV
+          disable-disks-tests.sh >> $GITHUB_ENV
+          disable-dtrace-tests.sh >> $GITHUB_ENV
+          disable-zfs-tests.sh >> $GITHUB_ENV
+          disable-notyet-tests.sh >> $GITHUB_ENV
+          run-kyua.sh >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
     #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
     #CIRRUS_CLONE_DEPTH: 1
     #MAKEOBJDIRPREFIX: /tmp/obj
@@ -57,6 +57,7 @@ jobs:
         run: |
           echo "${{ env.META }}"
           echo "${{ env.USE_TEST_SUBR }}"
+          echo "${{ env.JSON_RESPONSE }}"
       - name: Install packages
         run: |
           sudo apt update
