@@ -13,7 +13,7 @@ concurrency:
 jobs:
   deploy:
     name: Run FreeBSD Testing
-    runs-on: macos-10.15
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
