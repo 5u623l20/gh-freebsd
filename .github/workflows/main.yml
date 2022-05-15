@@ -14,15 +14,15 @@ env:
   WORKSPACE: ${{ github.workspace }}
 
 jobs:
-  env:
-    USE_TEST_SUBR: |
-      disable-disks-tests.sh
-      disable-dtrace-tests.sh
-      disable-zfs-tests.sh
-      disable-notyet-tests.sh
-      run-kyua.sh
   deploy:
     name: Run FreeBSD Testing
+    env:
+      USE_TEST_SUBR: |
+        disable-disks-tests.sh
+        disable-dtrace-tests.sh
+        disable-zfs-tests.sh
+        disable-notyet-tests.sh
+        run-kyua.sh
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
