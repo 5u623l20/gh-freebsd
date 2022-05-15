@@ -26,9 +26,9 @@ jobs:
           sudo apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
       - name: Check ENV
         run: echo $WORKSPACE
-      - name: List files
-        run: find .
       - name: Check Current Working Directory
         run: pwd
+      - name: List files
+        run: ls -la
       - name: Fetch Artifact
         run: sh -ex .cirrus-ci/scripts/fetch-artifact.sh
