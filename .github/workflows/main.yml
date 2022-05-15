@@ -31,7 +31,7 @@ jobs:
       - name: Set ENV
         run: |
           echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
-          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-$TARGET_ARCH-run.sh' >> $GITHUB_ENV
+          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh' >> $GITHUB_ENV
           #TARGET: arm64
           #QEMU_ARCH: $TARGET_ARCH
           #QEMU_MACHINE: virt
