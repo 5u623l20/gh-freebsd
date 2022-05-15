@@ -21,3 +21,14 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
+      - name: Check CPU
+        run: |
+          lscpu
+          cat /proc/cpuinfo
+          cat /proc/cpuinfo | grep processor | wc -l
+          cat /proc/cpuinfo | grep 'core id'
+          nproc
+      - name: Check Memory
+        run: |
+          free -h
+          cat /proc/meminfo
