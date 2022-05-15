@@ -17,5 +17,7 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: Check Disk space
-        run: df -ah
+      - name: Install packages
+        run: |
+          apt update
+          apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
