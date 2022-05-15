@@ -25,9 +25,6 @@ jobs:
         run: |
           echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
           echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-$TARGET_ARCH-run.sh' >> $GITHUB_ENV
-          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-          curl https://example.lab >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
           #TARGET: arm64
           #QEMU_ARCH: $TARGET_ARCH
           #QEMU_MACHINE: virt
@@ -57,7 +54,6 @@ jobs:
         run: |
           echo "${{ env.META }}"
           echo "${{ env.USE_TEST_SUBR }}"
-          echo "${{ env.JSON_RESPONSE }}"
       - name: Install packages
         run: |
           sudo apt update
