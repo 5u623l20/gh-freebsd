@@ -12,7 +12,7 @@ fi
 zstd -T0 -fd -q --no-progress "${IMG_NAME}.zst"
 TEST_BASE=${WORKSPACE}/.cirrus-ci/scripts/test
 
-TIMEOUT=7200
+TIMEOUT=2592000
 
 : ${VM_CPU_COUNT:=2}
 : ${VM_MEM_SIZE:=6144m}
