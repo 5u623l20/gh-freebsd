@@ -12,6 +12,22 @@ concurrency:
 
 env:
   WORKSPACE: ${{ github.workspace }}
+  TARGET_ARCH: aarch64
+  TARGET: arm64
+  META: ${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh
+    #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
+    #CIRRUS_CLONE_DEPTH: 1
+    #MAKEOBJDIRPREFIX: /tmp/obj
+    #MAKECONF: /dev/null
+    #SRCCONF: /dev/null
+    #JFLAG: 8
+    #EXTRA_FLAGS:
+    #FBSD_BRANCH: $CIRRUS_BRANCH
+    #GIT_COMMIT: $CIRRUS_CHANGE_IN_REPO
+    #JOB_NAME: $CIRRUS_TASK_NAME
+    #WITH_LIB32: 0
+    #WITH_DEBUG: 0
+    #WITH_TESTS: 0
 
 jobs:
   deploy:

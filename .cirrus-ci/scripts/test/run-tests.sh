@@ -14,8 +14,8 @@ TEST_BASE=${WORKSPACE}/.cirrus-ci/scripts/test
 
 TIMEOUT=7200
 
-: ${VM_CPU_COUNT:=8}
-: ${VM_MEM_SIZE:=31744m}
+: ${VM_CPU_COUNT:=2}
+: ${VM_MEM_SIZE:=6144m}
 
 METADIR=meta
 METAOUTDIR=meta-out
