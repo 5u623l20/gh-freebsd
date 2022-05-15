@@ -14,6 +14,13 @@ env:
   WORKSPACE: ${{ github.workspace }}
 
 jobs:
+  env:
+    USE_TEST_SUBR: |
+      disable-disks-tests.sh
+      disable-dtrace-tests.sh
+      disable-zfs-tests.sh
+      disable-notyet-tests.sh
+      run-kyua.sh
   deploy:
     name: Run FreeBSD Testing
     runs-on: ubuntu-latest
@@ -30,14 +37,6 @@ jobs:
           #QEMU_MACHINE: virt
           #QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57
           #USE_QEMU: 1
-          cat <<EOF >> $GITHUB_ENV
-          USE_TEST_SUBR='
-          disable-disks-tests.sh
-          disable-dtrace-tests.sh
-          disable-zfs-tests.sh
-          disable-notyet-tests.sh
-          run-kyua.sh'
-          EOF
     #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
     #CIRRUS_CLONE_DEPTH: 1
     #MAKEOBJDIRPREFIX: /tmp/obj
