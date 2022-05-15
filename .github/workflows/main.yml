@@ -17,6 +17,8 @@ jobs:
   deploy:
     name: Run FreeBSD Testing
     env:
+      MAKEOBJDIRPREFIX: /tmp/obj
+      USE_QEMU: 1
       USE_TEST_SUBR: |
         disable-disks-tests.sh
         disable-dtrace-tests.sh
@@ -32,13 +34,8 @@ jobs:
         run: |
           echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
           #TARGET: arm64
-          #QEMU_ARCH: $TARGET_ARCH
-          #QEMU_MACHINE: virt
-          #QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57
-          #USE_QEMU: 1
     #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
     #CIRRUS_CLONE_DEPTH: 1
-    #MAKEOBJDIRPREFIX: /tmp/obj
     #MAKECONF: /dev/null
     #SRCCONF: /dev/null
     #JFLAG: 8
@@ -52,6 +49,9 @@ jobs:
       - name: Set Nested ENV
         run: |
           echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh' >> $GITHUB_ENV
+          echo 'QEMU_ARCH=${{ env.TARGET_ARCH }}' >> $GITHUB_ENV
+          echo 'QEMU_MACHINE=virt' >> $GITHUB_ENV
+          echo 'QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57' >> $GITHUB_ENV
       - name: Install packages
         run: |
           sudo apt update
