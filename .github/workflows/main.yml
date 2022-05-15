@@ -12,9 +12,33 @@ concurrency:
 
 env:
   WORKSPACE: ${{ github.workspace }}
-  TARGET_ARCH: aarch64
-  TARGET: arm64
-  META: ${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh
+
+jobs:
+  deploy:
+    name: Run FreeBSD Testing
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set ENV
+        run: |
+          echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
+          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-$TARGET_ARCH-run.sh
+          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
+          curl https://example.lab >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          #TARGET: arm64
+          #QEMU_ARCH: $TARGET_ARCH
+          #QEMU_MACHINE: virt
+          #QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57
+          #USE_QEMU: 1
+          echo 'USE_TEST_SUBR<<EOF' >> $GITHUB_ENV
+          disable-disks-tests.sh >> $GITHUB_ENV
+          disable-dtrace-tests.sh >> $GITHUB_ENV
+          disable-zfs-tests.sh >> $GITHUB_ENV
+          disable-notyet-tests.sh >> $GITHUB_ENV
+          run-kyua.sh'EOF' >> $GITHUB_ENV
     #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
     #CIRRUS_CLONE_DEPTH: 1
     #MAKEOBJDIRPREFIX: /tmp/obj
@@ -28,15 +52,9 @@ env:
     #WITH_LIB32: 0
     #WITH_DEBUG: 0
     #WITH_TESTS: 0
-
-jobs:
-  deploy:
-    name: Run FreeBSD Testing
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v2
+      - name: Check nested env calls
+        run: echo "${{ env.META }}"
+        run: echo "${{ env.USE_TEST_SUBR }}"
       - name: Install packages
         run: |
           sudo apt update
