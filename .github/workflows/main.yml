@@ -1,0 +1,21 @@
+---
+name: Main
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Run FreeBSD Testing
+    runs-on: macos-10.15
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Check Disk space
+        run: df -ah
