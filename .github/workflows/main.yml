@@ -10,6 +10,9 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  WORKSPACE: $GITHUB_WORKSPACE
+
 jobs:
   deploy:
     name: Run FreeBSD Testing
@@ -21,14 +24,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
-      - name: Check CPU
-        run: |
-          lscpu
-          cat /proc/cpuinfo
-          cat /proc/cpuinfo | grep processor | wc -l
-          cat /proc/cpuinfo | grep 'core id'
-          nproc
-      - name: Check Memory
-        run: |
-          free -h
-          cat /proc/meminfo
+      - name: Check ENV
+        run: echo $WORKSPACE
+      - name: Fetch Artifact
+        run: sh -ex ${WORKSPACE}/.cirrus-ci/scripts/fetch-artifact.sh
