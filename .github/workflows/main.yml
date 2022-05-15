@@ -19,5 +19,5 @@ jobs:
     steps:
       - name: Install packages
         run: |
-          apt update
-          apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
+          sudo apt update
+          sudo apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
