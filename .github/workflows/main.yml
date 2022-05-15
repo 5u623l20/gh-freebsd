@@ -31,7 +31,6 @@ jobs:
       - name: Set ENV
         run: |
           echo 'TARGET_ARCH=aarch64' >> $GITHUB_ENV
-          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh' >> $GITHUB_ENV
           #TARGET: arm64
           #QEMU_ARCH: $TARGET_ARCH
           #QEMU_MACHINE: virt
@@ -50,20 +49,15 @@ jobs:
     #WITH_LIB32: 0
     #WITH_DEBUG: 0
     #WITH_TESTS: 0
-      - name: Check nested env calls
+      - name: Set Nested ENV
         run: |
-          echo "${{ env.META }}"
-          echo "${{ env.USE_TEST_SUBR }}"
+          echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh' >> $GITHUB_ENV
       - name: Install packages
         run: |
           sudo apt update
           sudo apt install -y curl qemu qemu-kvm qemu-system qemu-efi u-boot-qemu
       - name: Check ENV
-        run: echo $WORKSPACE
-      - name: Check Current Working Directory
-        run: pwd
-      - name: List files
-        run: ls -la
+        run: echo ${{ env.META }}
       - name: Fetch Artifact
         run: sh -ex .cirrus-ci/scripts/fetch-artifact.sh
       - name: Run Test
