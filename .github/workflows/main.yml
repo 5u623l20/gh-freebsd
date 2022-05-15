@@ -20,6 +20,7 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - uses: actions/checkout@v2
       - name: Install packages
         run: |
           sudo apt update
