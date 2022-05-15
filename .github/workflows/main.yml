@@ -33,13 +33,13 @@ jobs:
           #QEMU_MACHINE: virt
           #QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57
           #USE_QEMU: 1
-          echo 'USE_TEST_SUBR<<EOF' >> $GITHUB_ENV
-          disable-disks-tests.sh >> $GITHUB_ENV
-          disable-dtrace-tests.sh >> $GITHUB_ENV
-          disable-zfs-tests.sh >> $GITHUB_ENV
-          disable-notyet-tests.sh >> $GITHUB_ENV
-          run-kyua.sh >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          #echo 'USE_TEST_SUBR<<EOF' >> $GITHUB_ENV
+          #disable-disks-tests.sh >> $GITHUB_ENV
+          #disable-dtrace-tests.sh >> $GITHUB_ENV
+          #disable-zfs-tests.sh >> $GITHUB_ENV
+          #disable-notyet-tests.sh >> $GITHUB_ENV
+          #run-kyua.sh >> $GITHUB_ENV
+          #echo 'EOF' >> $GITHUB_ENV
     #ARTIFACT_DEST: artifact/${FBSD_BRANCH}/${GIT_COMMIT}/${TARGET}/${TARGET_ARCH}
     #CIRRUS_CLONE_DEPTH: 1
     #MAKEOBJDIRPREFIX: /tmp/obj
