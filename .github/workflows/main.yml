@@ -33,3 +33,8 @@ jobs:
         run: ls -la
       - name: Fetch Artifact
         run: sh -ex .cirrus-ci/scripts/fetch-artifact.sh
+      - name: Run Test
+        run: |
+          cd ${WORKSPACE}
+          ls -la ${WORKSPACE}/work
+          sh -ex .cirrus-ci/scripts/test/run-tests.sh
