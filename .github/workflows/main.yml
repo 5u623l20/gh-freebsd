@@ -53,8 +53,9 @@ jobs:
     #WITH_DEBUG: 0
     #WITH_TESTS: 0
       - name: Check nested env calls
-        run: echo "${{ env.META }}"
-        run: echo "${{ env.USE_TEST_SUBR }}"
+        run: |
+          echo "${{ env.META }}"
+          echo "${{ env.USE_TEST_SUBR }}"
       - name: Install packages
         run: |
           sudo apt update
