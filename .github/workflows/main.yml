@@ -51,7 +51,7 @@ jobs:
           echo 'META=${{ env.WORKSPACE }}/.cirrus-ci/scripts/test/meta/main-${{ env.TARGET_ARCH }}-run.sh' >> $GITHUB_ENV
           echo 'QEMU_ARCH=${{ env.TARGET_ARCH }}' >> $GITHUB_ENV
           echo 'QEMU_MACHINE=virt' >> $GITHUB_ENV
-          echo 'QEMU_EXTRA_PARAM: -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57' >> $GITHUB_ENV
+          echo 'QEMU_EXTRA_PARAM=-bios /usr/lib/u-boot/qemu_arm64/u-boot.bin -cpu cortex-a57' >> $GITHUB_ENV
       - name: Install packages
         run: |
           sudo apt update
